@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "dnsmasq.fullname" . }}
+  labels:
+    {{- include "dnsmasq.labels" . | nindent 4 }}
+data:
+  dnsmasq.conf: |
+    log-queries
+    no-resolv
+    server=1.0.0.1
+    server=1.1.1.1
+    strict-order
+    {{- range $entry, $val := .Values.dnsmasq }}
+    address=/{{ $val.host }}/{{ $val.ip }}
+    {{- end }}

@@ -1,0 +1,78 @@
+image:
+  repository: jpillora/dnsmasq
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart version.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+dnsmasq: {}
+  # Specify which host names to mask.
+  # Note: Defined as a map instead of array to allow easy setting with --set
+  #entry1:
+  #  host: "mco.mineplex.com"
+  #  ip: "104.238.130.180"
+  #entry2:
+  #  host: "hivebedrock.network"
+  #  ip: "104.238.130.180"
+  #entry3:
+  #  host: "mco.mineplex.com"
+  #  ip: "104.238.130.180"
+  #entry4:
+  #  host: "play.inpvp.net"
+  #  ip: "104.238.130.180"
+  #entry5:
+  #  host: "mco.lbsg.net"
+  #  ip: "104.238.130.180"
+  #entry6:
+  #  host: "mco.cubecraft.net"
+  #  ip: "104.238.130.180"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: LoadBalancer
+  port: 53
+  protocol: UDP
+  # ipAddress
+  # ipAddressResourceGroup
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
